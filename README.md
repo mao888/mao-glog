@@ -19,7 +19,7 @@
 且添加了全局唯一的字段 service，使用 glog 的方式有两种，分别如下:
 ### 一、返回全局 logger 变量方式
 ```golang
-import "glog github.com/mao888/go-log"
+import glog "github.com/mao888/go-log"
 
 // 初始化全局logger
 levelType := InfoLevel
