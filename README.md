@@ -56,11 +56,14 @@ func init() {
 
 func main() {
 	// 日志打印
+	// 方式一：返回全局 logger 变量方式
+	glog.C(context.Background()).Debugf("debugf: %s", "dddd")
+	glog.C(context.Background()).Infof("test: %s", "info")
+
+	// 方式二：直接调用包方法
 	glog.Debug(context.Background(), "test debug")
 	glog.Infof(context.Background(), "test: %s", "info")
 	glog.Debugf(context.Background(), "debugf: %s", "dddd")
-	glog.C(context.Background()).Debugf("debugf: %s", "dddd")
-	glog.C(context.Background()).Infof("test: %s", "info")
 	// 也支持打印时新加字段，但仅影响本次调用，不会影响全局字段，仅支持打印 info 日志
 	glog.InfoWithField(context.Background(), map[string]interface{}{
 		"temp_field": "glog is good ",
@@ -69,13 +72,14 @@ func main() {
 ```
 **控制台输出：**
 ```go
+2023-01-19T15:10:47.609+0800    debug   go-zap/go-log.go:41     debugf: dddd    {"s_code": "30800"}
+2023-01-19T15:10:47.609+0800    info    go-zap/go-log.go:42     test: info      {"s_code": "30800"}
+
 2023-01-19T15:10:47.608+0800    debug   go-zap/go-log.go:38     test debug      {"s_code": "30800"}
 2023-01-19T15:10:47.608+0800    info    go-zap/go-log.go:39     test: info      {"s_code": "30800"}
 2023-01-19T15:10:47.608+0800    debug   go-zap/go-log.go:40     debugf: dddd    {"s_code": "30800"}
-2023-01-19T15:10:47.609+0800    debug   go-zap/go-log.go:41     debugf: dddd    {"s_code": "30800"}
-2023-01-19T15:10:47.609+0800    info    go-zap/go-log.go:42     test: info      {"s_code": "30800"}
-2023-01-19T15:10:47.609+0800    info    go-zap/go-log.go:44     msg1msg2        {"s_code": "30800", "temp_field": "glog is good "}
 
+2023-01-19T15:10:47.609+0800    info    go-zap/go-log.go:44     msg1msg2        {"s_code": "30800", "temp_field": "glog is good "}
 ```
 
 ### 二、直接调用包方法
