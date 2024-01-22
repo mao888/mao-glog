@@ -1,6 +1,6 @@
-module github.com/mao888/go-log
+module github.com/mao888/mao-glog
 
-go 1.16
+go 1.19
 
 require (
 	github.com/BurntSushi/toml v1.2.1 // indirect
